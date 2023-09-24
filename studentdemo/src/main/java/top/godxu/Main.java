@@ -34,20 +34,20 @@ public class Main {
     /** 显示主菜单 */
     public static void showMainMenu(int second) {
         if (second == 0) {
-            System.out.println("\n----- Godxu 员工管理系统 -----\n");
+            System.out.println("\n----- Godxu 学生管理系统 -----\n");
         } else {
-            System.out.println("----- Godxu 员工管理系统 -----\n");
+            System.out.println("----- Godxu 学生管理系统 -----\n");
         }
-        System.out.println("\t 1. 员工列表");
-        System.out.println("\t 2. 查询员工");
-        System.out.println("\t 3. 添加员工");
-        System.out.println("\t 4. 修改员工");
-        System.out.println("\t 5. 删除员工");
+        System.out.println("\t 1. 学生列表");
+        System.out.println("\t 2. 查询学生");
+        System.out.println("\t 3. 添加学生");
+        System.out.println("\t 4. 修改学生");
+        System.out.println("\t 5. 删除学生");
         System.out.println("\t 6. 退出");
         System.out.print("\n    请输入操作数: ");
     }
 
-    /** 根据职位id，获取员工职位名称 */
+    /** 根据班级id，获取学生班级名称 */
     public static String getPositionById(Integer id) {
         String resource = "mybatis-config.xml";
         InputStream inputStream = null;
@@ -67,12 +67,12 @@ public class Main {
         return "不详";
     }
 
-    /** 显示员工信息列表 */
+    /** 显示学生信息列表 */
     public static void showEmployees(List<Employee> employees) {
         if (employees.size() < 1) {
-            System.out.println("\t >>无员工信息<<");
+            System.out.println("\t >>无学生信息<<");
         }
-        System.out.println(" 编号\t姓名\t年龄\t 职位\n");
+        System.out.println(" 编号\t姓名\t年龄\t 班级\n");
         for (int i = 0; i < employees.size(); i++) {
             System.out.println(String.format(" %s\t%s\t%s\t %s", employees.get(i).getId(), employees.get(i).getName(),
                     employees.get(i).getAge(), getPositionById(employees.get(i).getPosition())));
@@ -80,20 +80,20 @@ public class Main {
         }
     }
 
-    /** 显示员工信息 */
+    /** 显示学生信息 */
     public static void showEmployee(Employee employee) {
         clearScreen();
         if (employee == null) {
-            System.out.println("\n----- Godxu 员工管理系统 -----");
-            System.out.println("\t - 员工信息 -\n");
-            System.out.println("       >> 无员工信息 <<");
+            System.out.println("\n----- Godxu 学生管理系统 -----");
+            System.out.println("\t - 学生信息 -\n");
+            System.out.println("       >> 无学生信息 <<");
         } else {
-            System.out.println("\n----- Godxu 员工管理系统 -----");
-            System.out.println("\t - 员工信息 -\n");
+            System.out.println("\n----- Godxu 学生管理系统 -----");
+            System.out.println("\t - 学生信息 -\n");
             System.out.println("\t  编号\t" + employee.getId());
             System.out.println("\t  姓名\t" + employee.getName());
             System.out.println("\t  年龄\t" + employee.getAge());
-            System.out.println("\t  职位\t" + getPositionById(employee.getPosition()));
+            System.out.println("\t  班级\t" + getPositionById(employee.getPosition()));
         }
     }
 
@@ -160,7 +160,7 @@ public class Main {
         scanner.close();
     }
 
-    /** 员工列表 */
+    /** 学生列表 */
     public static void employeeList() {
         String resource = "mybatis-config.xml";
         InputStream inputStream = null;
@@ -174,20 +174,20 @@ public class Main {
         List<Employee> employees = sqlSession.selectList("EmployeeMapper.selectAll");
         // System.out.println(employees);
         clearScreen();
-        System.out.println("\n----- Godxu 员工管理系统 -----");
-        System.out.println("\t - 员工列表 -\n");
+        System.out.println("\n----- Godxu 学生管理系统 -----");
+        System.out.println("\t - 学生列表 -\n");
         showEmployees(employees);
         waitForAnyKey();
         clearScreen();
         mainMenu();
     }
 
-    /** 查询员工 */
+    /** 查询学生 */
     public static void selectEmployee() {
-        System.out.println("----- Godxu 员工管理系统 -----");
-        System.out.println("\t - 查询员工 -\n");
+        System.out.println("----- Godxu 学生管理系统 -----");
+        System.out.println("\t - 查询学生 -\n");
         System.out.print("\t  输入off返回 \n\n");
-        System.out.print("      请输入员工编号: ");
+        System.out.print("      请输入学生编号: ");
         Scanner scanner = new Scanner(System.in);
         String snum = scanner.next();
         int num = 0;
@@ -222,7 +222,7 @@ public class Main {
         scanner.close();
     }
 
-    /** 添加员工 */
+    /** 添加学生 */
     public static void addEmployee() {
         String resource = "mybatis-config.xml";
         InputStream inputStream = null;
@@ -236,10 +236,10 @@ public class Main {
         List<Position> positions = sqlSession.selectList("PositionMapper.selectAll");
         Employee newEmployee = new Employee();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("----- Godxu 员工管理系统 -----");
-        System.out.println("\t - 添加员工 -\n");
+        System.out.println("----- Godxu 学生管理系统 -----");
+        System.out.println("\t - 添加学生 -\n");
         System.out.print("\t  输入off返回 \n\n");
-        System.out.print("    请输入员工姓名: ");
+        System.out.print("    请输入学生姓名: ");
         newEmployee.setName(scanner.next());
         if (newEmployee.getName().equals("off")) {
             clearScreen();
@@ -248,9 +248,9 @@ public class Main {
             return;
         }
         clearScreen();
-        System.out.println("----- Godxu 员工管理系统 -----");
+        System.out.println("----- Godxu 学生管理系统 -----");
         System.out.println("\n\t - 输入年龄 -\n");
-        System.out.print("    请输入员工年龄: ");
+        System.out.print("    请输入学生年龄: ");
         try {
             newEmployee.setAge(scanner.nextInt());
         } catch (InputMismatchException e) {
@@ -261,12 +261,12 @@ public class Main {
             return;
         }
         clearScreen();
-        System.out.println("----- Godxu 员工管理系统 -----");
-        System.out.println("\n\t - 选择职位 -\n");
+        System.out.println("----- Godxu 学生管理系统 -----");
+        System.out.println("\n\t - 选择班级 -\n");
         for (int i = 0; i < positions.size(); i++) {
             System.out.println("\t    " + positions.get(i).getId() + "." + positions.get(i).getPosition_name());
         }
-        System.out.print("\n  请输入员工职位序号: ");
+        System.out.print("\n  请输入学生班级序号: ");
         try {
             newEmployee.setPosition(scanner.nextInt());
             int flag = 0;
@@ -286,11 +286,11 @@ public class Main {
                 sqlSession.commit();
                 clearScreen();
                 System.out.println("\t >>添加成功<<");
-                System.out.println("----- Godxu 员工管理系统 -----");
-                System.out.println("\t - 员工信息 -\n");
+                System.out.println("----- Godxu 学生管理系统 -----");
+                System.out.println("\t - 学生信息 -\n");
                 System.out.println("\t  姓名\t" + newEmployee.getName());
                 System.out.println("\t  年龄\t" + newEmployee.getAge());
-                System.out.println("\t  职位\t" + getPositionById(newEmployee.getPosition()));
+                System.out.println("\t  班级\t" + getPositionById(newEmployee.getPosition()));
                 waitForAnyKey();
                 clearScreen();
                 mainMenu();
@@ -306,7 +306,7 @@ public class Main {
         }
     }
 
-    /** 修改员工 */
+    /** 修改学生 */
     public static void updateEmployee() {
         String resource = "mybatis-config.xml";
         InputStream inputStream = null;
@@ -320,10 +320,10 @@ public class Main {
         List<Employee> employees = sqlSession.selectList("EmployeeMapper.selectAll");
         List<Position> positions = sqlSession.selectList("PositionMapper.selectAll");
         // System.out.println(employees);
-        System.out.println("----- Godxu 员工管理系统 -----");
-        System.out.println("\t - 员工列表 -\n");
+        System.out.println("----- Godxu 学生管理系统 -----");
+        System.out.println("\t - 学生列表 -\n");
         showEmployees(employees);
-        System.out.print("\n输入修改的员工编号(off返回):");
+        System.out.print("\n输入修改的学生编号(off返回):");
         Scanner scanner = new Scanner(System.in);
         String snum = scanner.next();
         int num = 0;
@@ -340,13 +340,13 @@ public class Main {
                 if (employees.get(i).getId() == num) {
                     flag = 1;
                     clearScreen();
-                    System.out.println("\n----- Godxu 员工管理系统 -----");
-                    System.out.println("\t - 员工信息 -\n");
+                    System.out.println("\n----- Godxu 学生管理系统 -----");
+                    System.out.println("\t - 学生信息 -\n");
                     System.out.println("\t  编号\t" + employees.get(i).getId());
                     System.out.println("\t  姓名\t" + employees.get(i).getName());
                     System.out.println("\t  年龄\t" + employees.get(i).getAge());
-                    System.out.println("\t  职位\t" + getPositionById(employees.get(i).getPosition()));
-                    System.out.print("\n    > 1.姓名 2.年龄 3.职位 <\n\n    输入需要修改的序号:");
+                    System.out.println("\t  班级\t" + getPositionById(employees.get(i).getPosition()));
+                    System.out.print("\n    > 1.姓名 2.年龄 3.班级 <\n\n    输入需要修改的序号:");
                     try {
                         int choice = scanner.nextInt();
                         if (choice < 1 || choice > 3) {
@@ -357,7 +357,7 @@ public class Main {
                             return;
                         } else if (choice == 1) {
                             clearScreen();
-                            System.out.println("\n----- Godxu 员工管理系统 -----");
+                            System.out.println("\n----- Godxu 学生管理系统 -----");
                             System.out.println("\t - 修改姓名 -\n\n");
                             System.out.print("\n    输入新姓名:");
                             employees.get(i).setName(scanner.next());
@@ -365,7 +365,7 @@ public class Main {
                             sqlSession.commit();
                         } else if (choice == 2) {
                             clearScreen();
-                            System.out.println("\n----- Godxu 员工管理系统 -----");
+                            System.out.println("\n----- Godxu 学生管理系统 -----");
                             System.out.println("\t - 修改年龄 -\n\n");
                             System.out.print("\n    输入新年龄:");
                             try {
@@ -381,14 +381,14 @@ public class Main {
                             }
                         } else if (choice == 3) {
                             clearScreen();
-                            System.out.println("\n----- Godxu 员工管理系统 -----");
-                            System.out.println("\t - 修改职位 -\n\n");
+                            System.out.println("\n----- Godxu 学生管理系统 -----");
+                            System.out.println("\t - 修改班级 -\n\n");
                             for (int j = 0; j < positions.size(); j++) {
                                 System.out.println(
                                         "\t    " + positions.get(j).getId() + "."
                                                 + positions.get(j).getPosition_name());
                             }
-                            System.out.print("\n     输入新职位序号:");
+                            System.out.print("\n     输入新班级序号:");
                             try {
                                 employees.get(i).setPosition(scanner.nextInt());
                                 int flag2 = 0;
@@ -417,12 +417,12 @@ public class Main {
                         }
                         clearScreen();
                         System.out.println("\t >>修改成功<<");
-                        System.out.println("----- Godxu 员工管理系统 -----");
-                        System.out.println("\t - 员工信息 -\n");
+                        System.out.println("----- Godxu 学生管理系统 -----");
+                        System.out.println("\t - 学生信息 -\n");
                         System.out.println("\t  编号\t" + employees.get(i).getId());
                         System.out.println("\t  姓名\t" + employees.get(i).getName());
                         System.out.println("\t  年龄\t" + employees.get(i).getAge());
-                        System.out.println("\t  职位\t" + getPositionById(employees.get(i).getPosition()));
+                        System.out.println("\t  班级\t" + getPositionById(employees.get(i).getPosition()));
                         waitForAnyKey();
                         clearScreen();
                         mainMenu();
@@ -454,7 +454,7 @@ public class Main {
         }
     }
 
-    /** 删除员工 */
+    /** 删除学生 */
     public static void deleteEmployee() {
         String resource = "mybatis-config.xml";
         InputStream inputStream = null;
@@ -467,10 +467,10 @@ public class Main {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         List<Employee> employees = sqlSession.selectList("EmployeeMapper.selectAll");
         // System.out.println(employees);
-        System.out.println("----- Godxu 员工管理系统 -----");
-        System.out.println("\t - 员工列表 -\n");
+        System.out.println("----- Godxu 学生管理系统 -----");
+        System.out.println("\t - 学生列表 -\n");
         showEmployees(employees);
-        System.out.print("\n输入删除的员工编号(off返回):");
+        System.out.print("\n输入删除的学生编号(off返回):");
         Scanner scanner = new Scanner(System.in);
         String snum = scanner.next();
         int num = 0;
@@ -487,12 +487,12 @@ public class Main {
                 if (employees.get(i).getId() == num) {
                     flag = 1;
                     clearScreen();
-                    System.out.println("----- Godxu 员工管理系统 -----");
-                    System.out.println("\t - 员工信息 -\n");
+                    System.out.println("----- Godxu 学生管理系统 -----");
+                    System.out.println("\t - 学生信息 -\n");
                     System.out.println("\t  编号\t" + employees.get(i).getId());
                     System.out.println("\t  姓名\t" + employees.get(i).getName());
                     System.out.println("\t  年龄\t" + employees.get(i).getAge());
-                    System.out.println("\t  职位\t" + getPositionById(employees.get(i).getPosition()));
+                    System.out.println("\t  班级\t" + getPositionById(employees.get(i).getPosition()));
                     System.out.print("\n       确认删除(y/n):");
                     String confirm = scanner.next();
                     if (confirm.equals("y") || confirm.equals("Y")) {
