@@ -37,14 +37,14 @@
         DELETE FROM employee WHERE id = #{id}
     </delete>
 
-    <select id=" selectByIds" parameterType=" int[]" resultType="top.godxu.pojo.Employee">
+    <select id="selectByIds" parameterType="int[]" resultType="top.godxu.pojo.Employee">
         select * from employee where id IN
-        <foreach collection=" array" item=" id" open="(" separator=" ," close=")">
+        <foreach collection="array" item="id" open="(" separator=" ," close=")">
             #{id}
         </foreach>
     </select>
 
-    <select id=" siftEmployee" parameterType="top . godxu . pojo . Employee" resultType="top . godxu. pojo. Employee ">
+    <select id="siftEmployee" parameterType="top.godxu.pojo.Employee" resultType="top.godxu.pojo.Employee">
         select * from employee
         <where>
             <if test="name != null and name != ''">
@@ -56,10 +56,10 @@
             <if test="position != null and position != 0">
                 and position_ id= #{position_id}
             </if>
-    </where>
+        </where>
     </select>
 
-    <delete id=" deleteEmployeesByIds" parameterType=" int[]">
+    <delete id="deleteEmployeesByIds" parameterType="int[]">
         DELETE FROM employee WHERE id IN
         <foreach collection="array" item="id" open="(" separator="," close=")">
             <if test="id != 0">
