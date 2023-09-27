@@ -17,7 +17,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class Main {
     public static void main(String[] args) {
         clearScreen();
-        showMainMenu();
+        // showMainMenu();
+        System.out.println(getAllTeachers());
     }
 
     /** 清屏 */
@@ -33,14 +34,11 @@ public class Main {
 
     /** 显示主菜单 */
     public static void showMainMenu() {
-        System.out.println("\t 1. 所有教师");
-        System.out.println("\t 2. 根据id查询教师");
-        System.out.println("\t 3. 添加教师");
-        System.out.println("\t 4. 修改教师");
-        System.out.println("\t 5. 删除教师");
-        System.out.println("\t 6. 查询教师任课信息");
-        System.out.println("\t 7. 查询课程所有任教老师信息");
-        System.out.print("\n    请输入操作数: ");
+        System.out.println(" 1. 所有教师");
+        System.out.println(" 2. 查询教师任课信息");
+        System.out.println(" 3. 查询课程所有任教老师信息");
+        System.out.print("\n 请输入操作数: ");
+        mainMenu();
     }
 
     /** 主菜单操作 */
@@ -50,19 +48,18 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         do {
             err = 0;
-            showMainMenu();
-            String snum = scanner.next();
+            String snum = scanner.nextLine();
             try {
                 num = Integer.parseInt(snum);
                 if (num < 1 || num > 6) {
                     clearScreen();
                     err = 1;
-                    System.out.println("\t >>输入无效<<");
+                    System.out.println("  >>输入无效<<");
                 }
             } catch (NumberFormatException e) {
                 clearScreen();
                 err = 1;
-                System.out.println("\t >>输入无效<<");
+                System.out.println("  >>输入无效<<");
             }
         } while (err == 1);
         if (err == 1) {
@@ -70,33 +67,26 @@ public class Main {
             return;
         }
         if (num == 1) {
-            clearScreen();
             System.out.println(getAllTeachers());
+            showMainMenu();
         } else if (num == 2) {
             clearScreen();
             
         } else if (num == 3) {
             clearScreen();
             
-        } else if (num == 4) {
-            clearScreen();
-        } else if (num == 5) {
-            clearScreen();
-        } else if (num == 6) {
-            clearScreen();
-        } else if (num == 7) {
-            clearScreen();
         } else {
             logout();
         }
         scanner.close();
+        return;
     }
 
     /** 退出 */
     public static void logout() {
         clearScreen();
         System.out.println("\n==================================\n");
-        System.out.println("\t     感谢使用");
+        System.out.println("      感谢使用");
         System.out.println("\n==================================\n");
         System.out.println("made by Godxu >> https://godxu.top\n\n");
     }
