@@ -17,4 +17,7 @@
         <mapper resource="TeacherMapper.xml" />
         <mapper resource="ClassMapper.xml" />
     </mappers>
+    <typeAliases>
+        <typeAlias alias="Teacher" type="top.godxu.Teacher"/>
+    </typeAliases>
 </configuration>

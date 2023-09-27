@@ -19,6 +19,7 @@ public class Main {
         clearScreen();
         // showMainMenu();
         System.out.println(getAllTeachers());
+        getTeacherClasses();
     }
 
     /** 清屏 */
@@ -104,5 +105,18 @@ public class Main {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         List<Teacher> Teachers = sqlSession.selectList("TeacherMapper.selectAll");
         return Teachers;
+    }
+
+    public static void getTeacherClasses() {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = null;
+        try {
+            inputStream = Resources.getResourceAsStream(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        Teacher teacher = TeacherMapper.getTeacherCourses(1);
     }
 }
