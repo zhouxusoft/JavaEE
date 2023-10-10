@@ -117,6 +117,6 @@ public class Main {
         }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        Teacher teacher = TeacherMapper.getTeacherCourses(1);
+        Teacher teacher = sqlSession.selectOne(TeacherMapper., sqlSession)
     }
 }

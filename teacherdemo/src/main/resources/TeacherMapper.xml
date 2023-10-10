@@ -7,7 +7,7 @@
         select * from teachers
     </select>
 
-    <resultMap id="teacherClassMap" type="top.godxu.Teacher">
+    <resultMap id="teacherClassMap" type="top.godxu.pojo.Teacher">
         <id property="id" column="teacher_id" />
         <result property="name" column="teacher_name" />
 

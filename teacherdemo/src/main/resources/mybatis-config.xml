@@ -18,6 +18,6 @@
         <mapper resource="ClassMapper.xml" />
     </mappers>
     <typeAliases>
-        <typeAlias alias="Teacher" type="top.godxu.Teacher"/>
+        <typeAlias alias="Teacher" type="top.godxu.pojo.Teacher"/>
     </typeAliases>
 </configuration>
