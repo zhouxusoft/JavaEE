@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TeacherMapper">
+
+    <select id="selectAll" resultType="top.godxu.pojo.Teacher">
+        select * from teachers
+    </select>
+
+    <resultMap id="teacherClassMap" type="top.godxu.pojo.Teacher">
+        <id property="id" column="teacher_id" />
+        <result property="name" column="teacher_name" />
+
+        <collection property="courses" ofType="top.godxu.pojo.Class">
+            <id property="id" column="class_id" />
+            <result property="name" column="class_name" />
+        </collection>
+    </resultMap>
+    
+    <select id="getTeacherClasses" resultMap="teacherClassMap">
+        SELECT
+            t.id AS teacher_id,
+            t.name AS teacher_name,
+            c.id AS class_id,
+            c.name AS class_name
+        FROM teacher t
+        LEFT JOIN teacher_class tc ON t.id = tc.teacher_id
+        LEFT JOIN classes c ON tc.class_id = c.id
+    </select>
+
+</mapper>
