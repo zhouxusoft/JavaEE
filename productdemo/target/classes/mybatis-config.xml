@@ -14,6 +14,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="XXXMapper.xml" />
+        <mapper resource="ProductMapper.xml" />
+        <mapper resource="UserMapper.xml" />
+        <mapper resource="OrderMapper.xml" />
     </mappers>
 </configuration>
